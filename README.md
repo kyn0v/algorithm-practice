@@ -3,7 +3,7 @@
 ## 在线文档
 【 [Github](https://github.com/greyireland/algorithm-pattern) 】
 
-【 [Gitbook]((https://greyireland.gitbook.io/algorithm-pattern/)) 】
+【 [Gitbook](https://greyireland.gitbook.io/algorithm-pattern/) 】
 
 ## 核心内容
 
