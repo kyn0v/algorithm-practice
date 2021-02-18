@@ -11,11 +11,9 @@
 
 示例 1
 
-[strStr](https://leetcode-cn.com/problems/implement-strstr/)
+- [x] [strStr](https://leetcode-cn.com/problems/implement-strstr/)
 
 > 给定一个  haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从 0 开始)。如果不存在，则返回  -1。
-
-思路：核心点遍历给定字符串字符，判断以当前字符开头字符串是否等于目标字符串
 
 ```c++
 int strStr(string haystack, string needle) {
@@ -23,12 +21,10 @@ int strStr(string haystack, string needle) {
     if (len_n == 0) {
         return 0;
     }
-    if (len_h < len_n) {
-        return -1;
-    }
-    int j;
-    for (int i = 0; i <= len_h - len_n; i++) {
-        for (j = 0; j < len_n; j++) {
+    int i = 0, j = 0;
+    for ( ; i + len_n <= len_h; i++) {
+        j = 0;
+        for ( ; j < len_n; j++) {
             if (haystack[i + j] != needle[j]) {
                 break;
             }
@@ -41,40 +37,17 @@ int strStr(string haystack, string needle) {
 }
 ```
 
-需要注意点
-
-- 循环时，i 不需要到 len-1
-- 如果找到目标字符串，len(needle)==j
-
 示例 2
 
-[subsets](https://leetcode-cn.com/problems/subsets/)
+- [ ] [subsets](https://leetcode-cn.com/problems/subsets/)
 
 > 给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。
 
-思路：这是一个典型的应用回溯法的题目，简单来说就是穷尽所有可能性，算法模板如下
-
-```c++
-result = []
-func backtrack(选择列表,路径):
-    if 满足结束条件:
-        result.add(路径)
-        return
-    for 选择 in 选择列表:
-        做选择
-        backtrack(选择列表,路径)
-        撤销选择
-```
-
-通过不停的选择，撤销选择，来穷尽所有可能性，最后将满足条件的结果返回
-
-答案代码
-
-```c++
+思路1：
 
 ```
 
-说明：后面会深入讲解几个典型的回溯算法问题，如果当前不太了解可以暂时先跳过
+```
 
 ## 面试注意点
 
