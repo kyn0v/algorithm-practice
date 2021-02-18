@@ -39,14 +39,31 @@ int strStr(string haystack, string needle) {
 
 示例 2
 
-- [ ] [subsets](https://leetcode-cn.com/problems/subsets/)
+- [x] [subsets](https://leetcode-cn.com/problems/subsets/)
 
 > 给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。
 
-思路1：
+思路1：通过掩码的方式实现枚举
 
 ```
-
+class Solution {
+public:
+    vector<int> v;
+    vector<vector<int>> ans;
+    vector<vector<int>> subsets(vector<int>& nums) {
+        int n = nums.size();
+        for(int mask = 0; mask < 1<<n; mask++){
+            v.clear();
+            for(int i = 0; i < n; i++){
+                if(mask & (1<<i)){
+                    v.push_back(nums[i]);
+                }
+            }
+            ans.push_back(v);
+        }
+        return ans;
+    }
+};
 ```
 
 ## 面试注意点
