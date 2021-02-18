@@ -1,19 +1,17 @@
-# 快速开始
+# Quick Start
 
-## 数据结构与算法
+## Data Structure and Algorithm
 
-数据结构是一种数据的表现形式，如链表、二叉树、栈、队列等都是内存中一段数据表现的形式。
-算法是一种通用的解决问题的模板或者思路，大部分数据结构都有一套通用的算法模板，所以掌握这些通用的算法模板即可解决各种算法问题。
+Data structure is a form of data, such as linked list, binary tree, stack, queue, etc. are all forms of data representaion in memory. Algorithm is a general problem-solving template or idea, and most data structure utilize a set of general algorithm templates.  
+Therefore, you can solve various algorithmic problems by mastering these general templates.  
 
-后面会分专题讲解各种数据结构、基本的算法模板、和一些高级算法模板，每一个专题都有一些经典练习题，完成所有练习的题后，你对数据结构和算法会有新的收获和体会。
+First introduce two algorithm problems, try to feel ~
 
-先介绍两个算法题，试试感觉~
-
-示例 1
+Example 1
 
 - [x] [strStr](https://leetcode-cn.com/problems/implement-strstr/)
 
-> 给定一个  haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从 0 开始)。如果不存在，则返回  -1。
+> Return the index of the first occurrence of `needle` in `haystack`, or -1 if `needle` is not part of `haystack`.
 
 ```c++
 int strStr(string haystack, string needle) {
@@ -37,13 +35,13 @@ int strStr(string haystack, string needle) {
 }
 ```
 
-示例 2
+Example 2
 
-- [x] [subsets](https://leetcode-cn.com/problems/subsets/)
+- [ ] [subsets](https://leetcode-cn.com/problems/subsets/)
 
-> 给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。
+> Given an integer array `nums` of unique elements, return all possible subsets (the power set).
 
-思路1：通过掩码的方式实现枚举
+Method 1: enumerating subsets by masks.
 
 ```
 class Solution {
@@ -66,17 +64,16 @@ public:
 };
 ```
 
-## 面试注意点
+## Tips
 
-我们大多数时候，刷算法题可能都是为了准备面试，所以面试的时候需要注意一些点
-
-- 快速定位到题目的知识点，找到知识点的**通用模板**，可能需要根据题目**特殊情况做特殊处理**。
-- 先去朝一个解决问题的方向！**先抛出可行解**，而不是最优解！先解决，再优化！
-- 代码的风格要统一，熟悉各类语言的代码规范。
-  - 命名尽量简洁明了，尽量不用数字命名如：i1、node1、a1、b2
-- 常见错误总结
-  - 访问下标时，不能访问越界
-  - 空值 nil 问题 run time error
+Most of the time, we are immersed in algorithm exercise for the interview, so some key points should be noted:  
+- Quickly locate the related knowledge of the problem, and match the **General Template** to the knowledge, sometimes it may be necessary to do special treatment based on the specific situation.
+- Throw the feasible solution first, not the optimal solution! Solve first, then optimize!
+- The code style should be unified, and be familiar with the code specifications of various language.
+  - Naming is as simple and clear as possible, try not to use numeric name such as: i1、node1、a1、b2.
+- Summary of common errors
+  - When accessing subscripts, you cannot access out-of-bounds.
+  - Run time error caused by `NULL` value.
 
 ## 练习
 
