@@ -73,6 +73,7 @@ public:
     vector<vector<int>> ans;
     vector<vector<int>> subsets(vector<int>& nums) {
         v.clear();
+        ans.clear();
         ans.push_back(v);
         for(int val: nums){
             int size = ans.size();
@@ -82,6 +83,32 @@ public:
                 ans.push_back(newSub);
             }
         }
+        return ans;
+    }
+};
+```
+
+*Method 3: Recursive enumeration.*
+
+```
+class Solution {
+public:
+    vector<vector<int>> ans;
+    void recursion(vector<int> &nums, int i, vector<vector<int>> &ans){
+        if(i >= nums.size()) return;
+        int size = ans.size();
+        for(int j = 0; j < size; j++) {
+            vector<int> newSub = ans[j];
+            newSub.push_back(nums[i]);
+            ans.push_back(newSub);
+        }
+        recursion(nums, i + 1, ans);
+    }
+    vector<vector<int>> subsets(vector<int> &nums) {
+        ans.clear();
+        vector<int> temp = {};
+        ans.push_back(temp);
+        recursion(nums, 0, ans);
         return ans;
     }
 };
