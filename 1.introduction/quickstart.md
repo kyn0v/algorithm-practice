@@ -7,7 +7,7 @@ Therefore, you can solve various algorithmic problems by mastering these general
 
 First introduce two algorithm problems, try to feel ~
 
-Example 1
+**Example 1**
 
 - [x] [strStr](https://leetcode-cn.com/problems/implement-strstr/)
 
@@ -35,13 +35,13 @@ int strStr(string haystack, string needle) {
 }
 ```
 
-Example 2
+**Example 2**
 
 - [ ] [subsets](https://leetcode-cn.com/problems/subsets/)
 
 > Given an integer array `nums` of unique elements, return all possible subsets (the power set).
 
-Method 1: enumerating subsets by masks.
+*Method 1: Enumerate subsets by masks.*
 
 ```
 class Solution {
@@ -58,6 +58,29 @@ public:
                 }
             }
             ans.push_back(v);
+        }
+        return ans;
+    }
+};
+```
+
+*Method 2: Loop enumeration.*
+
+```
+class Solution {
+public:
+    vector<int> v;
+    vector<vector<int>> ans;
+    vector<vector<int>> subsets(vector<int>& nums) {
+        v.clear();
+        ans.push_back(v);
+        for(int val: nums){
+            int size = ans.size();
+            for(int i = 0; i < size; i++){
+                vector<int> newSub = ans[i];
+                newSub.push_back(val);
+                ans.push_back(newSub);
+            }
         }
         return ans;
     }
