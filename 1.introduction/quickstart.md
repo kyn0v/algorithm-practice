@@ -43,7 +43,7 @@ int strStr(string haystack, string needle) {
 
 *Method 1: Enumerate subsets by masks.*
 
-```
+```c++
 class Solution {
 public:
     vector<int> v;
@@ -66,7 +66,7 @@ public:
 
 *Method 2: Loop enumeration.*
 
-```
+```c++
 class Solution {
 public:
     vector<int> v;
@@ -90,7 +90,7 @@ public:
 
 *Method 3: Recursive enumeration.*
 
-```
+```c++
 class Solution {
 public:
     vector<vector<int>> ans;
@@ -115,7 +115,8 @@ public:
 ```
 
 *Method 4: Preorder traversal of the state-space tree.*
-```
+
+```c++
 class Solution {
 private:
     vector<vector<int>> ans;
