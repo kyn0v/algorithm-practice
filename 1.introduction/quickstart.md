@@ -114,6 +114,32 @@ public:
 };
 ```
 
+*Method 4: Preorder traversal of the state-space tree.*
+```
+class Solution {
+private:
+    vector<vector<int>> ans;
+public:
+    void preOrder(vector<int>& nums, int depth, vector<int>& subset) {
+        if(depth >= nums.size()){
+            ans.push_back(subset);
+        } else{
+            subset.push_back(nums[depth]);
+            preOrder(nums, depth + 1, subset);
+            subset.pop_back();
+            preOrder(nums, depth + 1, subset);
+        }
+    }
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<int> subset;
+        subset.clear();
+        ans.clear();
+        preOrder(nums, 0, subset);
+        return ans;
+    }
+};
+```
+
 ## Tips
 
 Most of the time, we are immersed in algorithm exercise for the interview, so some key points should be noted:  
