@@ -37,7 +37,7 @@ int strStr(string haystack, string needle) {
 
 **Example 2**
 
-- [ ] [subsets](https://leetcode-cn.com/problems/subsets/)
+- [x] [subsets](https://leetcode-cn.com/problems/subsets/)
 
 > Given an integer array `nums` of unique elements, return all possible subsets (the power set).
 
@@ -72,8 +72,6 @@ public:
     vector<int> v;
     vector<vector<int>> ans;
     vector<vector<int>> subsets(vector<int>& nums) {
-        v.clear();
-        ans.clear();
         ans.push_back(v);
         for(int val: nums){
             int size = ans.size();
@@ -105,7 +103,6 @@ public:
         recursion(nums, i + 1, ans);
     }
     vector<vector<int>> subsets(vector<int> &nums) {
-        ans.clear();
         vector<int> temp = {};
         ans.push_back(temp);
         recursion(nums, 0, ans);
@@ -133,9 +130,30 @@ public:
     }
     vector<vector<int>> subsets(vector<int>& nums) {
         vector<int> subset;
-        subset.clear();
-        ans.clear();
         preOrder(nums, 0, subset);
+        return ans;
+    }
+};
+```
+
+*Method 5: Backtrack.*
+
+```c++
+class Solution {
+private:
+    vector<vector<int>> ans;
+public:
+    void backtrack(vector<int>& nums, vector<int>& path, int start){
+        ans.push_back(path);
+        for(int i = start; i < nums.size(); i++){
+            path.push_back(nums[i]);
+            backtrack(nums, path, i+1);
+            path.pop_back();
+        }
+    }
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<int> path;
+        backtrack(nums, path, 0);
         return ans;
     }
 };
@@ -154,5 +172,5 @@ Most of the time, we are immersed in algorithm exercise for the interview, so so
 
 ## 练习
 
-- [ ] [strStr](https://leetcode-cn.com/problems/implement-strstr/)
-- [ ] [subsets](https://leetcode-cn.com/problems/subsets/)
+- [x] [strStr](https://leetcode-cn.com/problems/implement-strstr/)
+- [x] [subsets](https://leetcode-cn.com/problems/subsets/)
