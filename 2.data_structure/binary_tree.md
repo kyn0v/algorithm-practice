@@ -1,17 +1,17 @@
-# 二叉树
+# Binary Tree
 
-## 知识点
+## Key Points
 
-### 二叉树遍历
+### Binary Tree Traversals
 
-**前序遍历**：**先访问根节点**，再前序遍历左子树，再前序遍历右子树
-**中序遍历**：先中序遍历左子树，**再访问根节点**，再中序遍历右子树
-**后序遍历**：先后序遍历左子树，再后序遍历右子树，**再访问根节点**
+**Preorder Traversal**：**Visit root node first**，then traverse the left subtree in preorder, and finally traverse the right subtree in preorder.  
+**Inorder Traversal**：Traverse the left subtree in inorder first, **then visit root node**, and finally traverse the right subtree in inorder.  
+**Postorder Traversal**：Traverse the left subtree in postorder first, then traverse the right subtree, **and finally visit root node**.
 
-注意点
+Note:
 
-- 以根访问顺序决定是什么遍历
-- 左子树都是优先右子树
+- Determine the traversal type according to the order of node access  
+- The left subtree is accessed prior to the right subtree.
 
 ```c++
 struct TreeNode {
@@ -21,7 +21,7 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 ```
-#### 前序递归
+#### Recursive implement of preorder traversal
 
 ```c++
 vector<int> result;
@@ -35,7 +35,7 @@ vector<int> preorderTraversal(TreeNode *root) {
 }
 ```
 
-#### 前序非递归
+#### Non-recursive implement of preorder traversal
 
 ```c++
 vector<int> preorderTraversal(TreeNode* root) {
@@ -55,7 +55,7 @@ vector<int> preorderTraversal(TreeNode* root) {
 }
 ```
 
-#### 中序非递归
+#### Non-recursive implement of inorder traversal
 
 ```c++
 vector<int> inorderTraversal(TreeNode *root) {
@@ -75,7 +75,7 @@ vector<int> inorderTraversal(TreeNode *root) {
 }
 ```
 
-#### 后序非递归
+#### Non-recursive implement of postorder traversal
 
 ```c++
 vector<int> postorderTraversal(TreeNode* root) {
@@ -105,11 +105,11 @@ vector<int> postorderTraversal(TreeNode* root) {
 }	
 ```
 
-注意点
+Note:
 
-- 核心就是：根节点必须在右节点弹出之后，再弹出
+- As for postorder traversal, the root node must pop up after the right node pops up.
 
-#### DFS 深度搜索-从上到下
+#### DFS (top-down)
 
 ```c++
 vector<int> preorderTraversal(Treenode *root) {
@@ -128,10 +128,12 @@ void DFS(Treenode *root, vector<int> result) {
 }
 ```
 
-#### DFS 深度搜索-从下向上（分治法）
+#### DFS (bottom-up)
 
 ```c++
-vector<int> preorderTraversal(Treenode *root) { return DFS(root); }
+vector<int> preorderTraversal(Treenode *root) {
+    return DFS(root);
+}
 
 vector<int> DFS(Treenode *root) {
     vector<int> result;
@@ -149,9 +151,9 @@ vector<int> DFS(Treenode *root) {
 }
 ```
 
-注意点：
+Note:
 
-> DFS 深度搜索（从上到下） 和分治法区别：前者一般将最终结果通过指针参数传入，后者一般递归返回结果最后合并
+- DFS 深度搜索（从上到下） 和分治法区别：前者一般将最终结果通过指针参数传入，后者一般递归返回结果最后合并
 
 #### BFS 层次遍历
 
