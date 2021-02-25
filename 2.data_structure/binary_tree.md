@@ -153,9 +153,9 @@ vector<int> DFS(Treenode *root) {
 
 Note:
 
-- DFS 深度搜索（从上到下） 和分治法区别：前者一般将最终结果通过指针参数传入，后者一般递归返回结果最后合并
+- Difference between top-down and bottom-up: the former generally passes the result though the parameters of pointer type, while the latter returns the result recursively and merges the final result in the end.
 
-#### BFS 层次遍历
+#### BFS (level order traversal)
 
 ```c++
 vector<int> BFS(Treenode *root){
@@ -180,21 +180,21 @@ vector<int> BFS(Treenode *root){
 }
 ```
 
-### 分治法应用
+### Application of the Divide-and-conquer Algorithm
 
-先分别处理局部，再合并结果
+Process the parts separatelly first, then merge the results.
 
-适用场景
+Applicable scenarios
 
-- 快速排序
-- 归并排序
-- 二叉树相关问题
+- Quicksort
+- Mergesort
+- Binary tree related problems
 
-分治法模板
+Template of divide-and-conquer algorithm
 
-- 递归返回条件
-- 分段处理
-- 合并结果
+- Set the stop condition in recursion
+- Divide the problem into a number of subproblems, and conquer the subproblem by solving them recursively 
+- Combine the subsolution into the final result
 
 ```c++
 ResultType traversal(TreeNode *root) {
@@ -214,7 +214,7 @@ ResultType traversal(TreeNode *root) {
 }
 ```
 
-#### 典型示例
+#### Typical example
 
 ```c++
 // 通过分治法遍历二叉树
