@@ -328,40 +328,50 @@ public:
 };
 ```
 
-#### balanced-binary-tree
+*2. balanced-binary-tree*
 
-[balanced-binary-tree](https://leetcode-cn.com/problems/balanced-binary-tree/)
+- [x] [balanced-binary-tree](https://leetcode-cn.com/problems/balanced-binary-tree/)
 
-> 给定一个二叉树，判断它是否是高度平衡的二叉树。
+> Given a binary tree, determine if it is height-balances
 
-思路：分治法，左边平衡 && 右边平衡 && 左右两边高度 <= 1，
-因为需要返回是否平衡及高度，要么返回两个数据，要么合并两个数据，
-所以用-1 表示不平衡，>0 表示树高度（二义性：一个变量有两种含义）。
-
-```go
-func isBalanced(root *TreeNode) bool {
-    if maxDepth(root) == -1 {
-        return false
+```c++
+class Solution1 {
+public:
+    int maxDepth(TreeNode* root) {
+        if(!root){
+            return 0;
+        }
+        int left = maxDepth(root->left);
+        int right = maxDepth(root->right);
+        if(left == -1 || right == -1 || abs(left - right) > 1){
+            return -1;
+        }
+        return max(left, right) + 1;
     }
-    return true
-}
-func maxDepth(root *TreeNode) int {
-    // check
-    if root == nil {
-        return 0
+    bool isBalanced(TreeNode* root) {
+        if(maxDepth(root) == -1){
+            return false;
+        }
+        return true;
     }
-    left := maxDepth(root.Left)
-    right := maxDepth(root.Right)
+};
 
-    // 为什么返回-1呢？（变量具有二义性）
-    if left == -1 || right == -1 || left-right > 1 || right-left > 1 {
-        return -1
+class Solution2 {
+public:
+    int height(TreeNode* root) {
+        if(!root){
+            return 0;
+        }
+        return max(height(root->left), height(root->right)) + 1;
     }
-    if left > right {
-        return left + 1
+    bool isBalanced(TreeNode* root) {
+        if(!root){
+            return true;
+        } else{
+            return (abs(height(root->left) - height(root->right)) <= 1 && isBalanced(root->left) && isBalanced(root->right));
+        }
     }
-    return right + 1
-}
+};
 ```
 
 注意
