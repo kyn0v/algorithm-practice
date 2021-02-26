@@ -182,17 +182,15 @@ vector<int> BFS(Treenode *root){
 
 ### Application of the Divide-and-conquer Algorithm
 
-Process the parts separatelly first, then merge the results.
-
-Applicable scenarios
+#### Applicable scenarios
 
 - Quicksort
 - Mergesort
 - Binary tree related problems
 
-Template of divide-and-conquer algorithm
+#### Template of divide-and-conquer algorithm
 
-- Set the stop condition in recursion
+- Set the stop condition of recursion
 - Divide the problem into a number of subproblems, and conquer the subproblem by solving them recursively 
 - Combine the subsolution into the final result
 
@@ -216,9 +214,12 @@ ResultType traversal(TreeNode *root) {
 
 #### Typical example
 
+*1. binary tree traversal*
+
 ```c++
-// 通过分治法遍历二叉树
-vector<int> preorderTraversal(Treenode *root) { return DFS(root); }
+vector<int> preorderTraversal(Treenode *root) { 
+    return divedeAndConquer(root); 
+}
 
 vector<int> divideAndConquer(Treenode *root) {
     vector<int> result;
@@ -236,11 +237,12 @@ vector<int> divideAndConquer(Treenode *root) {
 }
 ```
 
-#### 归并排序  
+*2. Mergesort*  
 
 ```c++
 void Merge(int a[], int low, int mid, int high) {
-    int* b = new int[high - low + 1];
+    int len = high - low + 1;
+    int* b = new int[len];
     int i = low, j = mid + 1, idx = 0;
     while (i <= mid && j <= high) {
         b[idx++] = a[i] < a[j] ? a[i++] : a[j++];
@@ -251,7 +253,7 @@ void Merge(int a[], int low, int mid, int high) {
     while (j <= high) {
         b[idx++] = a[j++];
     }
-    for (int k = 0; k <= (high - low); k++) {
+    for (int k = 0; k <= (len - 1); k++) {
         a[low + k] = b[k];
     }
     delete[] b;
@@ -267,24 +269,43 @@ void MergeSort(int a[], int low, int high) {
 }
 ```
 
-注意点
+Note:
 
-> 递归需要返回结果用于合并
+- Recursion needs to return the result for the merge process. 
 
-#### 快速排序  
+*3. Quicksort*  
 
 ```c++
+int Partition(int a[], int low, int high) {
+    int pivot = a[low];
+    int m = low;
+    for (int k = low + 1; k <= high; k++) {
+        if (a[k] < pivot) {
+            m++;
+            swap(a[k], a[m]);
+        }
+    }
+    swap(a[low], a[m]);
+    return m;
+}
 
+void QuickSort(int a[], int low, int high) {
+    if(low < high){
+        int pivot = Partition(a, low, high);
+        QuickSort(a, low, pivot - 1);
+        QuickSort(a, pivot + 1, high);
+    }
+}
 ```
 
-注意点：
+Note：
 
-> 快排由于是原地交换所以没有合并过程
-> 传入的索引是存在的索引（如：0、length-1 等），越界可能导致崩溃
+- Quicksort swaps elements in place, and doesn't merge elements.
+- The index passed in recursion is an existing index (such as: 0, lenth-1, etc.), and it may cause a crash if the index crosses the boundary.
 
-常见题目示例
+#### Typical question
 
-#### maximum-depth-of-binary-tree
+1. maximum-depth-of-binary-tree
 
 [maximum-depth-of-binary-tree](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
 
