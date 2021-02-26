@@ -374,10 +374,6 @@ public:
 };
 ```
 
-注意
-
-> 一般工程中，结果通过两个变量来返回，不建议用一个变量表示两种含义
-
 #### binary-tree-maximum-path-sum
 
 [binary-tree-maximum-path-sum](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/)
