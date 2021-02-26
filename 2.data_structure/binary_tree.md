@@ -305,30 +305,27 @@ Note：
 
 #### Typical question
 
-1. maximum-depth-of-binary-tree
+*1. maximum-depth-of-binary-tree*
 
-[maximum-depth-of-binary-tree](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
+- [x] [maximum-depth-of-binary-tree](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
 
-> 给定一个二叉树，找出其最大深度。
+> Given the root of a binary tree, return its maximum depth.
 
-思路：分治法
-
-```go
-func maxDepth(root *TreeNode) int {
-    // 返回条件处理
-    if root == nil {
-        return 0
+```c++
+class Solution {
+public:
+    int maxDepth(TreeNode* root) {
+        // stop condition
+        if(!root){
+            return 0;
+        }
+        // divide
+        int l_depth = maxDepth(root->left);
+        int r_depth = maxDepth(root->right);
+        // conquer
+        return max(l_depth, r_depth) + 1;
     }
-    // divide：分左右子树分别计算
-    left := maxDepth(root.Left)
-    right := maxDepth(root.Right)
-
-    // conquer：合并左右子树结果
-    if left > right {
-        return left + 1
-    }
-    return right + 1
-}
+};
 ```
 
 #### balanced-binary-tree
