@@ -269,10 +269,6 @@ void MergeSort(int a[], int low, int high) {
 }
 ```
 
-Note:
-
-- Recursion needs to return the result for the merge process. 
-
 *3. Quicksort*  
 
 ```c++
@@ -376,52 +372,60 @@ public:
 
 #### binary-tree-maximum-path-sum
 
-[binary-tree-maximum-path-sum](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/)
+- [x] [binary-tree-maximum-path-sum](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/)
 
-> 给定一个**非空**二叉树，返回其最大路径和。
+> Given the root a binary tree, return the maximum path sum of any path.
 
-思路：分治法，分为三种情况：左子树最大路径和最大，右子树最大路径和最大，左右子树最大加根节点最大，需要保存两个变量：一个保存子树最大路径和，一个保存左右加根节点和，然后比较这个两个变量选择最大值即可
-
-```go
-type ResultType struct {
-    SinglePath int // 保存单边最大值
-    MaxPath int // 保存最大值（单边或者两个单边+根的值）
-}
-func maxPathSum(root *TreeNode) int {
-    result := helper(root)
-    return result.MaxPath
-}
-func helper(root *TreeNode) ResultType {
-    // check
-    if root == nil {
-        return ResultType{
-            SinglePath: 0,
-            MaxPath: -(1 << 31),
+```c++
+class Solution1 {
+    struct ResultType{
+        int single_path;    // store the maximum value of single path
+        int max_path;   // store the maximum value of all path
+    };
+public:
+    ResultType helper(TreeNode *root){
+        // stop condition
+        if(!root){
+            return {0, INT_MIN};
         }
+        // divide
+        ResultType left =  helper(root->left);
+        ResultType right = helper(root->right);
+        // conquer
+        ResultType res;
+        res.single_path = (left.single_path>right.single_path)? max((left.single_path+root->val), 0):max((right.single_path+root->val), 0);
+        int maxpath = max(left.max_path, right.max_path);
+        res.max_path = max(maxpath, left.single_path+right.single_path+root->val);
+        return res;
     }
-    // Divide
-    left := helper(root.Left)
-    right := helper(root.Right)
+    int maxPathSum(TreeNode* root) {
+        ResultType res = helper(root);
+        return res.max_path;
+    }
+};
 
-    // Conquer
-    result := ResultType{}
-    // 求单边最大值
-    if left.SinglePath > right.SinglePath {
-        result.SinglePath = max(left.SinglePath + root.Val, 0)
-    } else {
-        result.SinglePath = max(right.SinglePath + root.Val, 0)
+class Solution2 {
+private:
+    int res = INT_MIN;
+public:
+    int helper(TreeNode* root) {
+        if(!root){
+            return 0;
+        }
+        // divide
+        int left = max(helper(root->left), 0);
+        int right = max(helper(root->right), 0);
+        // conquer
+        int maxpath = left + right + root->val;
+        res = max(maxpath, res);
+        int singlepath = max(left, right) + root->val;
+        return singlepath;
     }
-    // 求两边加根最大值
-    maxPath := max(right.MaxPath, left.MaxPath)
-    result.MaxPath = max(maxPath,left.SinglePath+right.SinglePath+root.Val)
-    return result
-}
-func max(a,b int) int {
-    if a > b {
-        return a
+    int maxPathSum(TreeNode* root) {
+        helper(root);
+        return res;
     }
-    return b
-}
+};
 ```
 
 #### lowest-common-ancestor-of-a-binary-tree
