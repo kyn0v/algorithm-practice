@@ -432,38 +432,70 @@ public:
 
 [lowest-common-ancestor-of-a-binary-tree](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)
 
-> 给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+> Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
 
-思路：分治法，有左子树的公共祖先或者有右子树的公共祖先，就返回子树的祖先，否则返回根节点
+```c++
+class Solution1 {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        // stop condition
+        if(!root){
+            return root;
+        }
+        if(root==p || root==q){
+            return root;
+        }
+        // divide
+        TreeNode* left = lowestCommonAncestor(root->left, p, q);
+        TreeNode* right = lowestCommonAncestor(root->right, p, q);
+        // conquer
+        if(left && right){
+            return root;
+        }
+        if(left){
+            return left;
+        }
+        if(right){
+            return right;
+        }
+        return NULL;
+    }
+};
 
-```go
-func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
-    // check
-    if root == nil {
-        return root
+class Solution2 {
+public:
+    unordered_map<int, TreeNode*> parent;
+    unordered_map<int, bool> visited;
+    void dfs(TreeNode* root){
+        if(root->left){
+            parent[root->left->val] = root;
+            dfs(root->left);
+        }
+        if(root->right){
+            parent[root->right->val] = root;
+            dfs(root->right);
+        }
     }
-    // 相等 直接返回root节点即可
-    if root == p || root == q {
-        return root
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        parent[root->val] = nullptr;
+        dfs(root);
+        TreeNode* temp = p;
+        TreeNode* ret = nullptr;
+        while(temp){
+            visited[temp->val] = true;
+            temp = parent[temp->val];
+        }
+        temp = q;
+        while(temp){
+            if(visited[temp->val]){
+                ret = temp;
+                break;
+            }
+            temp = parent[temp->val];
+        }
+        return ret;
     }
-    // Divide
-    left := lowestCommonAncestor(root.Left, p, q)
-    right := lowestCommonAncestor(root.Right, p, q)
-
-
-    // Conquer
-    // 左右两边都不为空，则根节点为祖先
-    if left != nil && right != nil {
-        return root
-    }
-    if left != nil {
-        return left
-    }
-    if right != nil {
-        return right
-    }
-    return nil
-}
+};
 ```
 
 ### BFS 层次应用
