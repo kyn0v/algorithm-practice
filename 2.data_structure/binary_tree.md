@@ -498,45 +498,39 @@ public:
 };
 ```
 
-### BFS 层次应用
+### Application of BFS
 
 #### binary-tree-level-order-traversal
 
-[binary-tree-level-order-traversal](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)
+[x] [binary-tree-level-order-traversal](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)
 
-> 给你一个二叉树，请你返回其按  **层序遍历**  得到的节点值。 （即逐层地，从左到右访问所有节点）
+> Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
 
-思路：用一个队列记录一层的元素，然后扫描这一层元素添加下一层元素到队列（一个数进去出来一次，所以复杂度 O(logN)）
+```c++
 
-```go
-func levelOrder(root *TreeNode) [][]int {
-	result := make([][]int, 0)
-	if root == nil {
-		return result
-	}
-	queue := make([]*TreeNode, 0)
-	queue = append(queue, root)
-	for len(queue) > 0 {
-		list := make([]int, 0)
-        // 为什么要取length？
-        // 记录当前层有多少元素（遍历当前层，再添加下一层）
-		l := len(queue)
-		for i := 0; i < l; i++ {
-            // 出队列
-			level := queue[0]
-			queue = queue[1:]
-			list = append(list, level.Val)
-			if level.Left != nil {
-				queue = append(queue, level.Left)
-			}
-			if level.Right != nil {
-				queue = append(queue, level.Right)
-			}
-		}
-		result = append(result, list)
-	}
-	return result
-}
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        if(!root) return {};
+        queue<TreeNode *> q;
+        vector<vector<int>> res;
+        TreeNode *cur = root;
+        q.push(cur);
+        while(!q.empty()){
+            int size = q.size();
+            vector<int> layer;
+            while(size--){
+                cur = q.front();
+                if(cur->left) q.push(cur->left);
+                if(cur->right) q.push(cur->right);
+                layer.push_back(cur->val);
+                q.pop();
+            }
+            res.push_back(layer);
+        }
+        return res;
+    }
+};
 ```
 
 #### binary-tree-level-order-traversal-ii
